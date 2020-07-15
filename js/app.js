@@ -8,7 +8,9 @@ function eventListeners(){
     formularioContactos.addEventListener('submit', leerFormulario);
 
     //listener para el boton eliminar
-    listadoContactos.addEventListener('click', eliminarContacto);
+    if(listadoContactos){
+        listadoContactos.addEventListener('click', eliminarContacto);
+    }
 }
 
 function leerFormulario(e){
