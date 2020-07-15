@@ -1,7 +1,7 @@
 <?php 
+    require_once('../funciones/bd.php');
 
-    if($_POST['accion'] == 'crear'){
-        require_once('../funciones/bd.php');
+    if( isset($_POST['accion']) && $_POST['accion'] == 'crear'){
 
         //validar las entradas
 
@@ -25,14 +25,38 @@
                 );
             }
             $statement->close();
-            $conn->close();
         } catch (Exception $e) {
             $respuesta = array(
                 'error' => $e->getMessage()
             );
         }
+
+        echo json_encode($respuesta);
     }
 
-    echo json_encode($respuesta);
+    if( isset($_GET['accion']) && $_GET['accion'] == 'borrar'){
+
+        $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+
+        try {
+            $statement = $conn->prepare("DELETE FROM contactos WHERE id = ? ");
+            $statement->bind_param("i", $id);
+            $statement->execute();
+            if($statement->affected_rows == 1){
+                $respuesta = array(
+                    'respuesta' => 'correcto'
+                );
+            }
+            $statement->close();
+        } catch (Exception $e) {
+            $respuesta = array(
+                'error' => $e->getMessage()
+            );
+        }
+        echo json_encode($respuesta);
+    }
+
+    $conn->close();
+
 
 ?>
