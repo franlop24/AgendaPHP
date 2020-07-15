@@ -36,7 +36,9 @@ function leerFormulario(e){
         if(accion === 'crear'){
             insertarBD(infoContacto);
         } else {
-
+            const idRegistro = document.querySelector('#id').value;
+            infoContacto.append('id', idRegistro);
+            actualizarRegistro(infoContacto);
         }
     }
 }
@@ -109,6 +111,30 @@ function insertarBD(data){
     }
 
     //enviar los datos
+    xhr.send(data);
+}
+
+function actualizarRegistro(data){
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('POST', 'inc/modelos/modelo-contactos.php', true);
+
+    xhr.onload = function(){
+        if(this.status === 200){
+            const respuesta = JSON.parse(xhr.responseText);
+
+            if(respuesta.respuesta === 'correcto'){
+                mostrarNotificacion('Contacto editado correctamente', 'correcto');
+            } else {
+                mostrarNotificacion('Hubo un error!', 'error');
+            }
+
+            setTimeout(() => {
+                window.location.href = 'index.php';
+            }, 3000);
+        }
+    }
+
     xhr.send(data);
 }
 
