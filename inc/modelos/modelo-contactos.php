@@ -10,7 +10,7 @@
         $telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_STRING);
 
         try {
-            $statement = $conn->prepare("INSERT INTO  contactos (nombre, empresa, telefono) VALUES (?, ?, ?)");
+            $statement = $conn->prepare("INSERT INTO contactos (nombre, empresa, telefono) VALUES (?, ?, ?)");
             $statement->bind_param("sss", $nombre, $empresa, $telefono);
             $statement->execute();
             if($statement->affected_rows == 1){
