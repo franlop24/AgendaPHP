@@ -14,7 +14,10 @@ function eventListeners(){
     }
 
     //Buscador
-    inputBuscador.addEventListener('input', buscarContactos);
+    if(inputBuscador){
+        inputBuscador.addEventListener('input', buscarContactos);
+    }
+    numeroContactos();
 }
 
 function leerFormulario(e){
@@ -111,6 +114,8 @@ function insertarBD(data){
             document.querySelector('form').reset();
             //mostrar la notificacion
             mostrarNotificacion('Contacto creado Correctamente', 'correcto');
+
+            numeroContactos();
         }
     }
 
@@ -164,6 +169,8 @@ function eliminarContacto(e){
                         //Eliminar registro deo DOM
                         e.target.parentElement.parentElement.parentElement.remove();
                         mostrarNotificacion('Contacto Eliminado', 'correcto');
+
+                        numeroContactos();
                     } else {
                         mostrarNotificacion('Hubo un error...', 'error');
                     }
@@ -206,4 +213,22 @@ function buscarContactos(e){
             registro.style.display = 'table-row';
         }
     });
+
+    numeroContactos();
+}
+
+function numeroContactos(){
+    const totalContactos = document.querySelectorAll('tbody tr'),
+          contenedorNumero = document.querySelector('.total-contactos span');
+
+    let total = 0;
+
+    totalContactos.forEach(contacto => {
+        if(contacto.style.display === '' || contacto.style.display === 'table-row'){
+            total ++;
+        }
+    });
+
+    console.log(total);
+    contenedorNumero.textContent = total;
 }
