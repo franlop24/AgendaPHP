@@ -30,4 +30,4 @@ $contacto = $resultado->fetch_assoc();
     </form>
 </div>
 
-<?php include 'inc/layout/footer.php' ?>
+<?php include 'inc/layout/footer.php'; ?>

@@ -1,6 +1,6 @@
 <?php 
 include 'inc/funciones/funciones.php';
-include 'inc/layout/header.php' 
+include 'inc/layout/header.php';
 ?>
 
 <div class="contenedor-barra">
@@ -11,7 +11,7 @@ include 'inc/layout/header.php'
     <form action="" id="contacto" action="#">
         <legend>Añada un Contacto <span>Todos los campos son obligatorios</span></legend>
 
-        <?php include 'inc/layout/formulario.php' ?>
+        <?php include 'inc/layout/formulario.php'; ?>
         
     </form>
 </div>
@@ -61,4 +61,4 @@ include 'inc/layout/header.php'
 
 </div>
 
-<?php include 'inc/layout/footer.php' ?>
+<?php include 'inc/layout/footer.php'; ?>
